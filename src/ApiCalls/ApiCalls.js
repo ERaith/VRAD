@@ -1,24 +1,5 @@
 import { BASE_URL } from "../constants/Constants";
 
-export const fetchLocations = (listings) => {
-  if(listings.length === 0) {
-    return  []
-  }
-  const promises = listings.map(listing => {
-    return fetch(BASE_URL + listing)
-      .then(res => res.json())
-      .then(listing => {
-        return {
-          ...listing
-        };
-      })
-      .catch(err => {
-        return err;
-      });
-  });
-  return Promise.all(promises);
-};
-
 export const fetchAreas = () => {
   return fetch('http://localhost:3001/api/v1/areas')
     .then(res => res.json())
@@ -42,3 +23,22 @@ export const getAreaDetails = (areaData) => {
   })
   return Promise.all(promises);
 }
+
+export const fetchLocations = (listings) => {
+  if(listings.length === 0) {
+    return  []
+  }
+  const promises = listings.map(listing => {
+    return fetch(BASE_URL + listing)
+      .then(res => res.json())
+      .then(listing => {
+        return {
+          ...listing
+        };
+      })
+      .catch(err => {
+        return err;
+      });
+  });
+  return Promise.all(promises);
+};
